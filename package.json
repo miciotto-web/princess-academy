@@ -5,7 +5,7 @@
   "description": "Princess Academy — Magical Party Experience",
   "scripts": {
     "dev": "powershell -ExecutionPolicy Bypass -File ./node20.ps1 next dev",
-    "build": "powershell -ExecutionPolicy Bypass -File ./node20.ps1 next build",
+    "build": "next build",
     "start": "next start",
     "lint": "powershell -ExecutionPolicy Bypass -File ./node20.ps1 next lint",
     "typecheck": "powershell -ExecutionPolicy Bypass -File ./node20.ps1 tsc --noEmit"
