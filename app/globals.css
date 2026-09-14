@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   ☀️ TEMA GIORNO (default)
+   Palette pubblica principale — luminosa, avorio/fucsia/oro.
+   ========================================================= */
+:root,
+[data-theme="day"] {
+  /* superfici */
+  --bg: #FFFBF4;
+  --bg-alt: #F6EFE3;
+  --card: #FFFFFF;
+
+  /* testi */
+  --text: #2B2B30;
+  --text-soft: #55555E;
+  --text-mute: #8A8A94;
+
+  /* accenti */
+  --accent: #D63384;
+  --accent-deep: #A50E66;
+
+  /* oro */
+  --gold: #D4AF37;
+  --gold-soft: #F0DEA4;
+
+  /* bordi & ombre */
+  --border: rgba(43, 43, 48, 0.10);
+  --border-gold: rgba(212, 175, 55, 0.40);
+  --shadow: 0 8px 30px -12px rgba(43, 43, 48, 0.18);
+  --glow: 0 20px 60px -20px rgba(199, 20, 125, 0.35);
+
+  /* texture/gradienti hero */
+  --bg-texture-1: rgba(212, 175, 55, 0.10);
+  --bg-texture-2: rgba(199, 20, 125, 0.06);
+
+  /* token legacy (retrocompatibilità) */
+  --princess: #d63384;
+  --princess-deep: #a50e66;
+  --gold: #d4af37;
+  --gold-soft: #f0dea4;
+  --ivory: #fffbf4;
+  --ink: #2b2b30;
+}
+
+/* =========================================================
+   🌙 TEMA NOTTE MAGICA
+   Castello incantato: blu notte/prugna, fucsia luminoso,
+   oro champagne, stelle e glow eleganti.
+   ========================================================= */
+[data-theme="night"] {
+  /* superfici */
+  --bg: #0F0A1F;
+  --bg-alt: #1B1230;
+  --card: #1A1230;
+
+  /* testi */
+  --text: #F8F4EA;
+  --text-soft: #E7DDF8;
+  --text-mute: #8B81A3;
+
+  /* accenti */
+  --accent: #FF2EA6;
+  --accent-deep: #C7147D;
+
+  /* oro */
+  --gold: #E9CB78;
+  --gold-soft: #B9994C;
+
+  /* bordi & ombre */
+  --border: rgba(255, 255, 255, 0.10);
+  --border-gold: rgba(212, 175, 55, 0.45);
+  --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.55);
+  --glow: 0 0 70px -10px rgba(255, 46, 166, 0.45);
+
+  /* texture/gradienti hero notte */
+  --bg-texture-1: rgba(255, 46, 166, 0.10);
+  --bg-texture-2: rgba(212, 175, 55, 0.06);
+
+  /* token legacy */
+  --princess: #FF2EA6;
+  --princess-deep: #C7147D;
+  --gold: #E9CB78;
+  --gold-soft: #B9994C;
+  --ivory: #0F0A1F;
+  --ink: #F8F4EA;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* elegant thin scrollbar (tema-dipendente) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-deep), var(--accent));
+  border-radius: 8px;
+  border: 2px solid var(--bg-alt);
+}
+
+@layer components {
+  .container-royal {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-princess-600;
+  }
+  .btn-princess {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-princess-600 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white shadow-royal transition-all duration-300 hover:-translate-y-0.5 hover:bg-princess-700 hover:shadow-[0_24px_60px_-18px_rgba(165,14,102,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-princess-400 focus-visible:ring-offset-2;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold-500/70 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-princess-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-2;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-princess-200 bg-white px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-princess-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-princess-600 hover:bg-princess-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-princess-400;
+  }
+  /* Pulsante primario Admin: fucsia pieno SEMPRE (Day e Night).
+     Non ridefinisce .btn-outline né .btn-princess: è dedicato
+     alle azioni primarie delle sezioni Admin (Dashboard "Azioni rapide",
+     "Modifica" inline quando è l'azione principale della riga, ecc.).
+     Le azioni secondarie (Annulla, Aggiungi categoria, Solo essenziali)
+     restano .btn-outline. */
+  .btn-admin-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-princess-600 px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white shadow-royal transition-all duration-300 hover:-translate-y-0.5 hover:bg-princess-700 hover:shadow-[0_24px_60px_-18px_rgba(165,14,102,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-princess-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .card-royal {
+    @apply overflow-hidden rounded-[1.75rem] border border-gold-500/25 bg-white shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-royal;
+  }
+  .gold-frame {
+    @apply rounded-[1.75rem] border border-gold-500/40 p-1.5;
+  }
+  .input-royal {
+    @apply w-full rounded-2xl border border-ink/10 bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink-mute/70 shadow-sm outline-none transition focus:border-princess-400 focus:ring-2 focus:ring-princess-100;
+  }
+  .label-royal {
+    @apply mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-soft;
+  }
+
+  /* ----- utility sematiche tema-dipendenti (sito pubblico) ----- */
+  .bg-page { background-color: var(--bg); }
+  .bg-page-alt { background-color: var(--bg-alt); }
+  .bg-card { background-color: var(--card); }
+  .text-body { color: var(--text); }
+  .text-muted { color: var(--text-mute); }
+  .border-soft { border-color: var(--border); }
+  .ring-gold { box-shadow: 0 0 0 1px var(--border-gold); }
+}
+
+/* Override componenti nel tema Notte Magica.
+   Si applica solo ai componenti che usano le utility
+   .btn-princess / .btn-gold / .btn-outline / .card-royal /
+   .input-royal / .label-royal / .eyebrow */
+[data-theme="night"] .btn-princess {
+  background: var(--accent);
+  box-shadow: var(--glow);
+}
+[data-theme="night"] .btn-princess:hover {
+  background: var(--accent-deep);
+}
+
+/* Night override per il pulsante primario Admin (dedicato,
+   NON condiviso con btn-princess pubblico per non impattare
+   l'uso pubblico della classe .btn-princess). */
+[data-theme="night"] .btn-admin-primary {
+  background: var(--accent);
+  box-shadow: var(--glow);
+}
+[data-theme="night"] .btn-admin-primary:hover {
+  background: var(--accent-deep);
+  box-shadow: 0 0 70px -10px rgba(255, 46, 166, 0.6);
+}
+
+[data-theme="night"] .btn-gold {
+  border-color: var(--border-gold);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--gold);
+}
+[data-theme="night"] .btn-gold:hover {
+  background: var(--gold);
+  color: #0F0A1F;
+}
+
+[data-theme="night"] .btn-outline {
+  border-color: var(--border-gold);
+  background: transparent;
+  color: var(--text);
+}
+[data-theme="night"] .btn-outline:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+[data-theme="night"] .card-royal {
+  background: var(--card);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow);
+}
+[data-theme="night"] .card-royal:hover {
+  box-shadow: var(--glow);
+}
+
+[data-theme="night"] .gold-frame {
+  border-color: var(--border-gold);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="night"] .input-royal {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="night"] .input-royal:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 46, 166, 0.18);
+}
+
+/* Select popup Night: voce attiva con fucsia luminoso */
+[data-theme="night"] [role="option"][aria-selected="true"] {
+  color: var(--accent);
+}
+[data-theme="night"] [role="option"]:hover,
+[data-theme="night"] [role="option"][data-opt-index]:hover {
+  background: rgba(255, 46, 166, 0.10);
+}
+
+[data-theme="night"] .label-royal {
+  color: var(--text-soft);
+}
+
+[data-theme="night"] .eyebrow {
+  color: var(--accent);
+}
+
+.texture-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.texture-gold-dots {
+  background-image: radial-gradient(rgba(212, 175, 55, 0.28) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Texture di fondo sezioni, tema-dipendente */
+.section-texture {
+  background-image: radial-gradient(800px 400px at 20% 0%, var(--bg-texture-1), transparent 60%),
+                    radial-gradient(700px 380px at 90% 100%, var(--bg-texture-2), transparent 60%);
+}
+
+/* Hero principale: gradiente tema-dipendente */
+.hero-bg {
+  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 38%, var(--princess) 62%, var(--accent-deep) 100%);
+  position: relative;
+}
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(255, 255, 255, 0.22), transparent 60%),
+                    radial-gradient(900px 500px at 85% 20%, var(--bg-texture-1), transparent 60%);
+  pointer-events: none;
+}
+
+/* Glow dorato dinamico (tema-dipendente) */
+.glow-gold {
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.45), 0 0 70px var(--gold-soft);
+}
+
+/* Notte: glow più morbido sul card */
+[data-theme="night"] .glow-gold {
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 80px var(--gold-soft);
+}
+
+/* Wave divider tema-dipendente (colore = sfondo pagina) */
+.wave-fill { color: var(--bg); }
+
+/* Sezione "Le nostre Princess" — sfondo delicato tema-dipendente */
+.princess-section {
+  background-image: linear-gradient(to bottom, var(--bg-alt), var(--bg));
+}
+
+/* Card titolo/numero percorso (gold-400/70) — tema-dipendente */
+[data-theme="night"] .text-gold-400\/70 {
+  color: var(--gold-soft);
+}
+
+/* Placeholder arte timeline/storia — tema-dipendente */
+.placeholder-art {
+  background-image: linear-gradient(135deg, var(--bg-alt), var(--gold-soft));
+  color: var(--text-mute);
+}
