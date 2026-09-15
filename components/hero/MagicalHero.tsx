@@ -174,7 +174,7 @@ export default function MagicalHero() {
             <div key={l} className="rounded-3xl border border-white/20 bg-white/10 px-4 py-5 backdrop-blur">
               <dt className="sr-only">{l}</dt>
               <dd className="font-display text-3xl font-bold text-gold-200">{n}</dd>
-              <dd className="mt-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75">{l}</dd>
+              <dd className="mt-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-white/75 sm:text-[11px] sm:tracking-[0.22em]">{l}</dd>
             </div>
           ))}
         </motion.dl>
